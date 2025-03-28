@@ -16,6 +16,7 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
                         <img
                             src={movie.medium_cover_image}
                             alt={movie.title}
+                            loading="lazy"
                             className="h-full w-full object-cover"
                         />
                     </div>

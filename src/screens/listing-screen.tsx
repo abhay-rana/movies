@@ -87,7 +87,7 @@ const MoviesListingScreen = () => {
             replace: true,
         });
 
-        setCurrentPage(1);
+        if (type !== 'page') setCurrentPage(1);
     };
 
     function clearFilters() {
