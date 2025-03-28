@@ -1,5 +1,5 @@
-import React from 'react';
-import { Route, Router, Switch } from 'wouter';
+import React, { useEffect } from 'react';
+import { Route, Router, Switch, useLocation } from 'wouter';
 
 const DetailScreen = React.lazy(() => import('~/screens/detail-screen'));
 const MoviesListingScreen = React.lazy(
@@ -13,6 +13,10 @@ const routeConfig = [
 ];
 
 const Routes: React.FC = () => {
+    const [_, setLocation] = useLocation();
+    useEffect(() => {
+        setLocation('/listing', { replace: true });
+    }, []);
     return (
         <>
             <Router>
