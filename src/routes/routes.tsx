@@ -13,9 +13,11 @@ const routeConfig = [
 ];
 
 const Routes: React.FC = () => {
-    const [_, setLocation] = useLocation();
+    const [location, setLocation] = useLocation();
     useEffect(() => {
-        setLocation('/listing', { replace: true });
+        if (location === '/') {
+            setLocation('/listing', { replace: true });
+        }
     }, []);
     return (
         <>
