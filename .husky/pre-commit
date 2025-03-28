@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# ? comment this if you want to disable the husky linting 
+npx lint-staged
+
+# npx husky add .husky/pre-commit "npx lint-staged"

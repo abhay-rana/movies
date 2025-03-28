@@ -1,0 +1,9 @@
+/node_module
+dist 
+build 
+coverage
+public
+
+# Ignore all HTML files:
+**/*.html
+

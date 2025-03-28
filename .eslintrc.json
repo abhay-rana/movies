@@ -1,0 +1,50 @@
+{
+    "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
+        "eslint-config-prettier"
+    ],
+    "env": {
+        // this is for the "document" and "window" global object
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint", "import"],
+    "root": true,
+    "rules": {
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": ["warn"],
+        "import/no-unresolved": "error",
+        "import/named": "error",
+        "no-undef": ["error"],
+        "no-var": ["error"],
+        "react/prop-types": "off",
+        "no-await-in-loop": "error",
+        "no-constant-binary-expression": "error",
+        "no-duplicate-imports": "error",
+        "no-new-native-nonconstructor": "error",
+        "no-promise-executor-return": "error",
+        "no-self-compare": "error",
+        "no-template-curly-in-string": "error",
+        "no-unmodified-loop-condition": "error",
+        "no-unreachable-loop": "error",
+        "no-unused-private-class-members": "error",
+        "no-use-before-define": "error",
+        "react/react-in-jsx-scope": "off",
+        "no-extra-boolean-cast": "off"
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        },
+        "import/resolver": {
+            "typescript": {}, // this loads <rootdir>/tsconfig.json to eslint,
+            "node": {
+                "extensions": [".js", ".jsx", ".ts", ".tsx"],
+                "moduleDirectory": ["node_modules", "src/"]
+            }
+        }
+    }
+}

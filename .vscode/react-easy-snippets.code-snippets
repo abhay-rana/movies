@@ -1,0 +1,112 @@
+{
+    // Place your global snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and
+    // description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope
+    // is left empty or omitted, the snippet gets applied to all languages. The prefix is what is
+    // used to trigger the snippet and the body will be expanded and inserted. Possible variables are:
+    // $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders.
+    // Placeholders with the same ids are connected.
+    // Example:
+    "useEffect Js": {
+        "scope": "javascript,typescript,javascriptreact",
+        "prefix": "useEffect,effect",
+        "body": ["useEffect(() => {", "    return () => {};", "}, []);", ""],
+        "description": "useEffect Js"
+    },
+    "useLocation Rn": {
+        "prefix": "useLocation,location,ul",
+        "body": ["const { setLocation} = useLocation();$0"],
+        "description": "React useLocation() hook"
+    },
+
+    "React Memo Component": {
+        "scope": "javascript,typescript,javascriptreact",
+        "prefix": "ramc",
+        "body": [
+            "import React, { memo } from 'react';",
+            "",
+            "const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} = () => {",
+            "    return (",
+            "        <>",
+            "            <div>${TM_FILENAME_BASE/^([^-]*)-([^.]*).*/${1:/pascalcase}${2:/pascalcase}/}</div>",
+            "        </>",
+            "    );",
+            "};",
+            "",
+            "export default memo(${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g})"
+        ],
+        "description": "Create Functional React Memo Component"
+    },
+    "React Connected Component": {
+        "prefix": "racc,connect",
+        "scope": "javascript,typescript,javascriptreact",
+        "body": [
+            "import React from 'react';",
+            "import { connect } from 'react-redux';",
+            "",
+            "const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} = () => {",
+            "    return (",
+            "        <>",
+            "            <div>${TM_FILENAME_BASE/^([^-]*)-([^.]*).*/${1:/pascalcase}${2:/pascalcase}/}</div>",
+            "        </>",
+            "    );",
+            "};",
+            "",
+            "const mapStateToProps = (state) => ({});",
+            "const mapDispatchToProps = (dispatch) => ({});",
+            "",
+            "export default connect(mapStateToProps, mapDispatchToProps)(${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g});",
+            ""
+        ],
+        "description": "React Connected Component"
+    },
+    "React Native Memoized Component": {
+        "prefix": "rnmc,nativememo",
+        "body": [
+            "import React, { memo } from 'react';",
+            "import { View } from 'react-native';",
+            "",
+            "import tw from '~/styles/tailwind';",
+            "",
+            "import Text from '~/components/library/text';",
+            "",
+            "const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} = () => {",
+            "    return (",
+            "        <View style={tw``}>",
+            "            <Text>${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g}</Text>",
+            "        </View>",
+            "    );",
+            "};",
+            "",
+            "export default memo(${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g})",
+            ""
+        ],
+        "description": ""
+    },
+    "React Native Connected Component": {
+        "prefix": "rncc,nativeconnect",
+        "body": [
+            "import React from 'react';",
+            "import { View } from 'react-native';",
+            "import { connect } from 'react-redux';",
+            "",
+            "import tw from '~/styles/tailwind';",
+            "",
+            "import Text from '~/components/library/text';",
+            "",
+            "const ${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g} = (props) => {",
+            "    return (",
+            "        <View style={tw``}>",
+            "            <Text>abh</Text>",
+            "        </View>",
+            "    );",
+            "};",
+            "",
+            "const mapStateToProps = (state) => ({});",
+            "const mapDispatchToProps = (dispatch) => ({});",
+            "",
+            "export default connect(mapStateToProps, mapDispatchToProps)(${TM_FILENAME_BASE/(.*)/${1:/pascalcase}/g});",
+            ""
+        ],
+        "description": ""
+    }
+}
