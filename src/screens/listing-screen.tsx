@@ -22,6 +22,7 @@ import { useAppDispatch } from '~/hooks/redux-hooks';
 import { useLoader } from '~/hooks/useLoader';
 import { getQueryParams } from '~/utils/getQueryParams';
 import { GENRES, SORT_OPTIONS } from '~/constants/movie-filters-consants';
+import { useDebounce } from '~/hooks/useDebounce';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -38,6 +39,7 @@ const MoviesListingScreen = () => {
 
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
+    const debouncedRequest = useDebounce((callback) => callback(), 300);
     const [loading, startLoader, endLoader] = useLoader(false);
     const { movies, error, totalPages } = useSelector(
         (state: RootState) => state.movies_store
@@ -50,15 +52,17 @@ const MoviesListingScreen = () => {
 
     useEffect(() => {
         startLoader();
-        dispatch(
-            fetchMovies({
-                page: currentPage,
-                query_term: searchTerm,
-                genre: selectedGenre,
-                sort_by: sortBy,
-                minimum_rating: minimumRating,
-            })
-        ).then(() => endLoader());
+        debouncedRequest(() =>
+            dispatch(
+                fetchMovies({
+                    page: currentPage,
+                    query_term: searchTerm,
+                    genre: selectedGenre,
+                    sort_by: sortBy,
+                    minimum_rating: minimumRating,
+                })
+            ).then(() => endLoader())
+        );
     }, [currentPage, searchTerm, selectedGenre, sortBy, minimumRating]);
 
     const handleFilterChange = (type: string, value: string | number) => {
