@@ -23,31 +23,35 @@ import {
 } from 'antd';
 import { DownloadOutlined, PlayCircleOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '~/hooks/redux-hooks';
+import { useLoader } from '~/hooks/useLoader';
 
 const { Title, Paragraph, Text } = Typography;
 
 const DetailScreen = () => {
     const [match, params] = useRoute('/movie/:id');
-
+    const [loader, startLoader, endLoader] = useLoader(true);
     const dispatch = useAppDispatch();
     const movie = useSelector(selectSelectedMovie);
     // const loading = useSelector(selectLoading);
     // const error = useSelector(selectError);
 
     useEffect(() => {
+        startLoader();
         const movieId = params?.id;
         if (movieId) {
-            dispatch(fetchMovieDetail(movieId));
+            dispatch(fetchMovieDetail(movieId))
+                .unwrap()
+                .then(() => endLoader());
         }
     }, [params?.id]);
 
-    // if (loading) {
-    //     return (
-    //         <div className="flex h-screen items-center justify-center">
-    //             <Spin size="large" />
-    //         </div>
-    //     );
-    // }
+    if (loader) {
+        return (
+            <div className="flex h-screen items-center justify-center">
+                <Spin size="large" />
+            </div>
+        );
+    }
 
     // if (error) {
     //     return (
