@@ -1,13 +1,9 @@
-import React, { useEffect } from 'react';
-import { useLocation, useRoute } from 'wouter';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../redux/store';
+import { useEffect } from 'react';
+import { useRoute } from 'wouter';
+import { useSelector } from 'react-redux';
+
 import { fetchMovieDetail } from '../redux/actions/movie-actions';
-import {
-    selectSelectedMovie,
-    selectLoading,
-    selectError,
-} from '../redux/slices/movieSlice';
+import { selectSelectedMovie } from '../redux/slices/movieSlice';
 import {
     Card,
     Row,

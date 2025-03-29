@@ -41,9 +41,11 @@ const MoviesListingScreen = () => {
     const dispatch = useAppDispatch();
     const debouncedRequest = useDebounce((callback) => callback(), 300);
     const [loading, startLoader, endLoader] = useLoader(false);
-    const { movies, error, totalPages } = useSelector(
-        (state: RootState) => state.movies_store
-    );
+    const {
+        movies = [],
+        error,
+        totalPages,
+    } = useSelector((state: RootState) => state.movies_store);
     const [currentPage, setCurrentPage] = useState(page || 1);
     const [searchTerm, setSearchTerm] = useState(search || '');
     const [selectedGenre, setSelectedGenre] = useState(genre || 'all');
@@ -51,8 +53,8 @@ const MoviesListingScreen = () => {
     const [minimumRating, setMinimumRating] = useState(rating || 0);
 
     useEffect(() => {
-        startLoader();
-        debouncedRequest(() =>
+        debouncedRequest(() => {
+            startLoader();
             dispatch(
                 fetchMovies({
                     page: currentPage,
@@ -61,8 +63,8 @@ const MoviesListingScreen = () => {
                     sort_by: sortBy,
                     minimum_rating: minimumRating,
                 })
-            ).then(() => endLoader())
-        );
+            ).then(() => endLoader());
+        });
     }, [currentPage, searchTerm, selectedGenre, sortBy, minimumRating]);
 
     const handleFilterChange = (type: string, value: string | number) => {
@@ -216,20 +218,19 @@ const MoviesListingScreen = () => {
                         ))}
                     </Row>
 
-                    {totalPages > 1 && (
-                        <div className="mt-8 flex justify-center">
-                            <Pagination
-                                current={currentPage}
-                                total={totalPages}
-                                onChange={(value) =>
-                                    handleFilterChange('page', value)
-                                }
-                                showSizeChanger={false}
-                                showQuickJumper
-                                showTotal={(total) => `Total ${total} pages`}
-                            />
-                        </div>
-                    )}
+                    <div className="mt-8 flex justify-center">
+                        <Pagination
+                            current={currentPage}
+                            total={totalPages}
+                            onChange={(value) =>
+                                handleFilterChange('page', value)
+                            }
+                            showSizeChanger={false}
+                            showQuickJumper
+                            showTotal={(total) => `Total ${total} pages`}
+                            hideOnSinglePage
+                        />
+                    </div>
                 </>
             )}
         </div>
