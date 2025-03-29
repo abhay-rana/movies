@@ -44,3 +44,8 @@ Data is fetched from the Movie Database API via RapidAPI.
 	•	Tailwind CSS
 	•	Axios
 	•	ESLint + Prettier
+
+### Routing
+	•	/ – Home route with movie listings.
+	•	/movie/:id – Movie detail page.
+	•	All filters and pagination are synced with the URL query params.
