@@ -8,17 +8,11 @@ const MoviesListingScreen = React.lazy(
 const RouteNotFound = React.lazy(() => import('~/screens/404'));
 
 const routeConfig = [
-    { path: '/listing', component: MoviesListingScreen },
+    { path: '/', component: MoviesListingScreen },
     { path: '/movie/:id', component: DetailScreen },
 ];
 
 const Routes: React.FC = () => {
-    const [location, setLocation] = useLocation();
-    useEffect(() => {
-        if (location === '/') {
-            setLocation('/listing', { replace: true });
-        }
-    }, []);
     return (
         <>
             <Router>

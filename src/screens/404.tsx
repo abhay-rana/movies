@@ -12,12 +12,12 @@ const RouteNotFound: React.FC = () => {
                 subTitle="Sorry, the page you visited does not exist."
                 extra={
                     <Space size="middle">
-                        <Link href="/listing">
+                        <Link href="/">
                             <Button type="primary" icon={<HomeOutlined />}>
                                 Back to Home
                             </Button>
                         </Link>
-                        <Link href="/listing">
+                        <Link href="/">
                             <Button icon={<SearchOutlined />}>
                                 Browse Movies
                             </Button>
