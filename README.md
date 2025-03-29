@@ -31,3 +31,16 @@ A modern, performant, and fully responsive movie listing web app built with Reac
 yarn install     # Install dependencies
 yarn dev         # Start development server
 ```
+
+### API Used
+
+Data is fetched from the Movie Database API via RapidAPI.
+
+### Tech Stack
+	•	React + Vite
+	•	TypeScript
+	•	Redux Toolkit
+	•	Wouter
+	•	Tailwind CSS
+	•	Axios
+	•	ESLint + Prettier
