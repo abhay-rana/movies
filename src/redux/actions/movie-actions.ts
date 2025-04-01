@@ -12,6 +12,7 @@ interface MovieQueryParams {
     sort_by?: string;
     order_by?: string;
     with_rt_ratings?: boolean;
+    cancelToken?: number;
 }
 
 export const fetchMovies = createAsyncThunk<MoviesResponse, MovieQueryParams>(
@@ -33,7 +34,7 @@ export const fetchMovies = createAsyncThunk<MoviesResponse, MovieQueryParams>(
             const response = await getApi(
                 `/list_movies.json?${queryParams}`,
                 {},
-                undefined
+                params.cancelToken
             );
             return response.data;
         } catch (error) {

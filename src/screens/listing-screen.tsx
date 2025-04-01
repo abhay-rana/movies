@@ -23,6 +23,7 @@ import { useLoader } from '~/hooks/useLoader';
 import { getQueryParams } from '~/utils/getQueryParams';
 import { GENRES, SORT_OPTIONS } from '~/constants/movie-filters-consants';
 import { useDebounce } from '~/hooks/useDebounce';
+import useCancelToken from '~/hooks/useCancelToken';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -40,6 +41,7 @@ const MoviesListingScreen = () => {
     const [form] = Form.useForm();
     const dispatch = useAppDispatch();
     const debouncedRequest = useDebounce((callback) => callback(), 300);
+    const { cancelToken, cancelRequest } = useCancelToken();
     const [loading, startLoader, endLoader] = useLoader(false);
     const {
         movies = [],
@@ -62,9 +64,13 @@ const MoviesListingScreen = () => {
                     genre: selectedGenre,
                     sort_by: sortBy,
                     minimum_rating: minimumRating,
+                    cancelToken,
                 })
             ).then(() => endLoader());
         });
+        return () => {
+            cancelRequest();
+        };
     }, [currentPage, searchTerm, selectedGenre, sortBy, minimumRating]);
 
     const handleFilterChange = (type: string, value: string | number) => {
@@ -101,7 +107,7 @@ const MoviesListingScreen = () => {
         setSelectedGenre('all');
         setSortBy('date_added');
         setMinimumRating(0);
-        setLocation('/listing', { replace: true });
+        setLocation('/', { replace: true });
         setCurrentPage(1);
     }
 
